@@ -19,7 +19,7 @@ const MovieCard = ({ item }) => {
         <h3 className="text-xl font-bold mb-3">{title}</h3>
         <div className="flex items-center justify-between text-sm opacity-50 mb-10">
           <span>{new Date(release_date).getFullYear()}</span>
-          <span>{vote_average}</span>
+          <span>{vote_average.toFixed(1)}⭐</span>
         </div>
         <Button onClick={() => navigate(`/movie/${id}`)} bgColor="secondary">
           Watch now
@@ -39,7 +39,7 @@ MovieCard.propTypes = {
 };
 const FallbackComponent = () => {
   return (
-    <p className="text-red-500 bg-red-50  ">
+    <p className="text-red-500 bg-red-50">
       Something went wrong in this component
     </p>
   );

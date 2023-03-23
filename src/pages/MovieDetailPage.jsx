@@ -9,18 +9,26 @@ import MovieCard from "components/movie/MovieCard";
 const MovieDetailPage = () => {
   const { movieId } = useParams();
   const { data } = useSWR(tmdbAPI.getMovieDetail(movieId), fetcher);
+  console.log(data);
   if (!data) return null;
-  const { backdrop_path, title, genres, overview } = data;
+  const { backdrop_path, title, genres, overview, vote_average, release_date } =
+    data;
   return (
     <div className="py-10">
-      <div className="w-full h-[800px] mb-10">
+      <div className="w-full h-screen  mb-10">
         <img
           className="w-full h-full object-cover"
           src={tmdbAPI.imageOriginal(backdrop_path)}
           alt=""
         />
       </div>
-      <h1 className="text-center text-5xl font-bold mb-5">{title}</h1>
+      <div className="flex justify-center items-center gap-x-3">
+        <h1 className="text-5xl font-bold">{title}</h1>
+        <span>( {vote_average.toFixed(1)}⭐)</span>
+      </div>
+      <p className="text-center mt-1 mb-5">
+        {new Date(release_date).getFullYear()}
+      </p>
       {genres.length > 0 && (
         <div className="flex items-center justify-center gap-x-5 mb-10">
           {genres.map((item) => (
@@ -33,7 +41,7 @@ const MovieDetailPage = () => {
           ))}
         </div>
       )}
-      <p className="text-center text-base leading-relaxed max-w-[600px] mx-auto mb-10">
+      <p className="text-center text-lg leading-relaxed max-w-[600px] mx-auto mb-10">
         {overview}
       </p>
       <MovieMeta type="credits"></MovieMeta>

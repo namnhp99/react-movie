@@ -2,11 +2,12 @@ import React from "react";
 
 const Button = ({
   onClick,
-  className,
+  className = "",
   full = false,
   type = "button",
   bgColor = "primary",
   children,
+  ...props
 }) => {
   let bgClassName = "bg-primary";
   switch (bgColor) {
@@ -26,8 +27,9 @@ const Button = ({
       className={`py-3 px-6 bg-primary rounded-lg mt-auto ${
         full ? "w-full" : ""
       } ${bgClassName} ${className}`}
+      {...props}
     >
-      <span className="flex items-center justify-center gap-x-2 ">
+      <span className="flex items-center justify-center gap-x-2">
         {children}
         <svg
           xmlns="http://www.w3.org/2000/svg"
